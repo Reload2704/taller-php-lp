@@ -1,15 +1,22 @@
 <?php
+/**
+ * ingreso.php — Autenticación de usuarios (Fase 1)
+ */
 session_start();
 require "usuario.php";
 require "registros.php";
- 
-$error = "";
+
+$error = isset($_GET['error']) ? $_GET['error'] : "";
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $cedula = $_POST['cedula'];
-    $clave  = $_POST['clave'];
- 
+    $cedula = trim($_POST['cedula'] ?? '');
+    $clave  = $_POST['clave'] ?? '';
+
     if (autenticar($cedula, $clave)) {
-        $_SESSION['cedula'] = $cedula;
+        // Sesión nueva y limpia para el usuario autenticado.
+        session_regenerate_id(true);
+        $_SESSION['cedula']  = $cedula;
+        $_SESSION['usuario'] = obtenerNombre($cedula);
         header("Location: tareas.php");
         exit;
     } else {
@@ -19,17 +26,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 <!DOCTYPE html>
-<html>
-<head><link rel="stylesheet" href="estilos.css"></head>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ingreso</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
 <body>
+<div class="contenedor">
     <h1>Ingreso</h1>
-    <?php if ($error): ?><p style="color:red;"><?= $error ?></p><?php endif; ?>
+
+    <?php if ($error !== ""): ?>
+        <p class="error"><?= htmlspecialchars($error) ?></p>
+    <?php endif; ?>
+
     <form method="POST" action="ingreso.php">
-        <label>Cédula:</label>
-        <input type="text" name="cedula" required><br>
-        <label>Contraseña:</label>
-        <input type="password" name="clave" required><br>
+        <label for="cedula">Cédula:</label>
+        <input type="text" id="cedula" name="cedula" maxlength="10" required>
+
+        <label for="clave">Contraseña:</label>
+        <input type="password" id="clave" name="clave" required>
+
         <input type="submit" value="Ingresar">
     </form>
+
+    <p class="ayuda">
+        ¿No tiene cuenta? <a href="formulario.php">Regístrese aquí</a> &nbsp;|&nbsp;
+        <a href="index.php">Volver al menú</a>
+    </p>
+</div>
 </body>
 </html>
