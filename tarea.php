@@ -29,10 +29,12 @@ function leerTareas($usuario) {
     foreach ($lineas as $linea) {
         $campos = str_getcsv($linea);
         if (count($campos) < 3) continue;
+        // trim() elimina espacios y retornos de carro (\r) que quedan
+        // cuando el archivo se escribe en Windows.
         $tareas[] = [
-            'id'     => $campos[0],
+            'id'     => trim($campos[0]),
             'texto'  => $campos[1],
-            'estado' => $campos[2]
+            'estado' => trim($campos[2])
         ];
     }
     return $tareas;

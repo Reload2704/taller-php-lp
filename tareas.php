@@ -90,8 +90,7 @@ $completadas = $listas['completadas'];
                     <td>
                         <a href="tareas.php?completar=<?= urlencode($t['id']) ?>">Completar</a>
                         &nbsp;|&nbsp;
-                        <a href="tareas.php?eliminar=<?= urlencode($t['id']) ?>"
-                           onclick="return confirm('¿Eliminar esta tarea?');">Eliminar</a>
+                        <a href="tareas.php?eliminar=<?= urlencode($t['id']) ?>">Eliminar</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -108,8 +107,7 @@ $completadas = $listas['completadas'];
                 <tr>
                     <td><s><?= htmlspecialchars($t['texto']) ?></s></td>
                     <td>
-                        <a href="tareas.php?eliminar=<?= urlencode($t['id']) ?>"
-                           onclick="return confirm('¿Eliminar esta tarea?');">Eliminar</a>
+                        <a href="tareas.php?eliminar=<?= urlencode($t['id']) ?>">Eliminar</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
