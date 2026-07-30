@@ -69,3 +69,32 @@ code {
   border-radius: 3px;
   font-family: Consolas, monospace;
 }
+
+/* ---- Añadidos para el Gestor de Tareas (Fase 2) ---- */
+
+select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 4px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: white;
+}
+
+input[type="reset"] {
+  margin-top: 16px;
+  margin-left: 8px;
+  background-color: #E5E8EC;
+  color: #1B2430;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
+}
+input[type="reset"]:hover { background-color: #D3D8DE; }
+
+td s { color: #5B6570; }
+
+tr:hover td { background-color: #FAFBFC; }
